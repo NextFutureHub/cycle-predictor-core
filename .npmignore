@@ -1,7 +1,40 @@
-/src
-/tests
-/tsconfig.json
-/tsup.config.ts
-/*.log
-/.vscode
-/.idea
+# Source files
+src/
+tests/
+
+# Development files
+tsconfig.json
+tsup.config.ts
+jest.config.js
+.eslintrc*
+.prettierrc*
+.husky/
+
+# Build artifacts
+*.tsbuildinfo
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+
+# Coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
