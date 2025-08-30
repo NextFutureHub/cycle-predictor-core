@@ -1,4 +1,3 @@
-import { describe, expect, it } from "vitest";
 import { PredictionEngine } from "../src/engine";
 
 const history = {
@@ -16,15 +15,15 @@ describe("PredictionEngine", () => {
   it("produces predictions with WMA strategy", () => {
     const engine = new PredictionEngine({ strategy: "wma" });
     const next = engine.predictNextPeriod(history);
-    expect(next.likely).toBeTypeOf("string");
+    expect(typeof next.likely).toBe("string");
     expect(next.window).not.toBeNull();
     expect(next.confidence).toBeGreaterThan(0);
 
     const ovu = engine.predictOvulation(history);
-    expect(ovu.likely).toBeTypeOf("string");
+    expect(typeof ovu.likely).toBe("string");
 
     const fertile = engine.predictFertileWindow(history);
-    expect(fertile.start).toBeTypeOf("string");
-    expect(fertile.end).toBeTypeOf("string");
+    expect(typeof fertile.start).toBe("string");
+    expect(typeof fertile.end).toBe("string");
   });
 });
