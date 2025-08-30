@@ -1,0 +1,7 @@
+/src
+/tests
+/tsconfig.json
+/tsup.config.ts
+/*.log
+/.vscode
+/.idea
