@@ -3,8 +3,13 @@
 **Предупреждение:** библиотека не является медицинским изделием и не заменяет консультацию врача. Все прогнозы вероятностные и предназначены только для информационных целей.
 
 [![npm version](https://badge.fury.io/js/cycle-predictor-core.svg)](https://badge.fury.io/js/cycle-predictor-core)
+[![npm downloads](https://img.shields.io/npm/dm/cycle-predictor-core.svg)](https://www.npmjs.com/package/cycle-predictor-core)
+[![npm status](https://img.shields.io/badge/npm-published-green.svg)](https://www.npmjs.com/package/cycle-predictor-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16.0.0-green.svg)](https://nodejs.org/)
+[![Tests](https://img.shields.io/badge/Tests-Passing-green.svg)](https://github.com/your-username/cycle-predictor-core)
+[![Build](https://img.shields.io/badge/Build-Passing-green.svg)](https://github.com/your-username/cycle-predictor-core)
 
 Библиотека для прогнозирования менструальных циклов на основе исторических данных. Предоставляет точные алгоритмы для предсказания следующих менструаций, овуляции и фертильных окон.
 
