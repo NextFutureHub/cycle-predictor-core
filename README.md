@@ -2,7 +2,6 @@
 
 **Предупреждение:** библиотека не является медицинским изделием и не заменяет консультацию врача. Все прогнозы вероятностные и предназначены только для информационных целей.
 
-[![npm version](https://badge.fury.io/js/cycle-predictor-core.svg)](https://badge.fury.io/js/cycle-predictor-core)
 [![npm downloads](https://img.shields.io/npm/dm/cycle-predictor-core.svg)](https://www.npmjs.com/package/cycle-predictor-core)
 [![npm status](https://img.shields.io/badge/npm-published-green.svg)](https://www.npmjs.com/package/cycle-predictor-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -1038,19 +1037,15 @@ export class YourAlgorithm extends BaseRule {
 ### Версии
 
 - **v1.0.0** - Базовая функциональность
-- **v1.1.0** - Улучшенные алгоритмы
-- **v2.0.0** - ML интеграция
-- **v2.1.0** - API и серверная поддержка
 
 ## 📞 Поддержка
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/cycle-predictor-core/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/cycle-predictor-core/discussions)
-- **Email**: support@cycle-predictor.com
+- **Email**: artem.ustimenko06@gmail.com
 
 ## 📄 Лицензия
 
 MIT License - см. файл [LICENSE](LICENSE) для деталей.
+⭐ If you like this library, consider giving it a star on GitHub!
 
 ---
 
