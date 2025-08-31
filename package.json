@@ -1,6 +1,6 @@
 {
   "name": "cyclia",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Библиотека для прогнозирования менструальных циклов на основе исторических данных",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
