@@ -1045,6 +1045,7 @@ export class YourAlgorithm extends BaseRule {
 ## 📄 Лицензия
 
 MIT License - см. файл [LICENSE](LICENSE) для деталей.
+
 ⭐ If you like this library, consider giving it a star on GitHub!
 
 ---
