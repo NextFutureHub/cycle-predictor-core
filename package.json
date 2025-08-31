@@ -1,5 +1,5 @@
 {
-  "name": "cycle-predictor-core",
+  "name": "cyclia",
   "version": "1.0.0",
   "description": "Библиотека для прогнозирования менструальных циклов на основе исторических данных",
   "main": "dist/index.js",
@@ -35,12 +35,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/cycle-predictor-core.git"
+    "url": "https://github.com/your-username/cyclia.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/cycle-predictor-core/issues"
+    "url": "https://github.com/your-username/cyclia/issues"
   },
-  "homepage": "https://github.com/your-username/cycle-predictor-core#readme",
+  "homepage": "https://github.com/your-username/cyclia#readme",
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",

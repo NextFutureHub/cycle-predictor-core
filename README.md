@@ -1,15 +1,15 @@
-# cycle-predictor-core
+# cyclia
 
 **Предупреждение:** библиотека не является медицинским изделием и не заменяет консультацию врача. Все прогнозы вероятностные и предназначены только для информационных целей.
 
-[![npm version](https://badge.fury.io/js/cycle-predictor-core.svg)](https://badge.fury.io/js/cycle-predictor-core)
-[![npm downloads](https://img.shields.io/npm/dm/cycle-predictor-core.svg)](https://www.npmjs.com/package/cycle-predictor-core)
-[![npm status](https://img.shields.io/badge/npm-published-green.svg)](https://www.npmjs.com/package/cycle-predictor-core)
+[![npm version](https://badge.fury.io/js/cyclia.svg)](https://badge.fury.io/js/cyclia)
+[![npm downloads](https://img.shields.io/npm/dm/cyclia.svg)](https://www.npmjs.com/package/cyclia)
+[![npm status](https://img.shields.io/badge/npm-published-green.svg)](https://www.npmjs.com/package/cyclia)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16.0.0-green.svg)](https://nodejs.org/)
-[![Tests](https://img.shields.io/badge/Tests-Passing-green.svg)](https://github.com/your-username/cycle-predictor-core)
-[![Build](https://img.shields.io/badge/Build-Passing-green.svg)](https://github.com/your-username/cycle-predictor-core)
+[![Tests](https://img.shields.io/badge/Tests-Passing-green.svg)](https://github.com/your-username/cyclia)
+[![Build](https://img.shields.io/badge/Build-Passing-green.svg)](https://github.com/your-username/cyclia)
 
 Библиотека для прогнозирования менструальных циклов на основе исторических данных. Предоставляет точные алгоритмы для предсказания следующих менструаций, овуляции и фертильных окон.
 
@@ -26,15 +26,15 @@
 ## 📦 Установка
 
 ```bash
-npm install cycle-predictor-core
+npm install cyclia
 ```
 
 ```bash
-yarn add cycle-predictor-core
+yarn add cyclia
 ```
 
 ```bash
-pnpm add cycle-predictor-core
+pnpm add cyclia
 ```
 
 ## 🎯 Быстрый старт
@@ -42,7 +42,7 @@ pnpm add cycle-predictor-core
 ### Базовое использование
 
 ```typescript
-import { PredictionEngine } from "cycle-predictor-core";
+import { PredictionEngine } from "cyclia";
 
 const engine = new PredictionEngine({ strategy: "wma" });
 
@@ -199,7 +199,7 @@ interface FertileWindow {
 
 ```typescript
 import { useState, useEffect } from 'react';
-import { PredictionEngine, HistoryInput } from 'cycle-predictor-core';
+import { PredictionEngine, HistoryInput } from 'cyclia';
 
 const useCyclePredictions = (history: HistoryInput) => {
   const [predictions, setPredictions] = useState(null);
@@ -322,7 +322,7 @@ const CycleCalendar: React.FC<CycleCalendarProps> = ({ periodHistory }) => {
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-import { PredictionEngine, type HistoryInput } from 'cycle-predictor-core';
+import { PredictionEngine, type HistoryInput } from 'cyclia';
 
 const props = defineProps<{
   periodHistory: HistoryInput;
@@ -367,7 +367,7 @@ watch(() => props.periodHistory, calculatePredictions, { immediate: true });
 ```typescript
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PredictionEngine, type HistoryInput, type PredictionResult } from 'cycle-predictor-core';
+import { PredictionEngine, type HistoryInput, type PredictionResult } from 'cyclia';
 
 export interface CyclePredictions {
   nextPeriod: PredictionResult;
@@ -418,7 +418,7 @@ export class CyclePredictionService {
 ```typescript
 import { Component, Input, OnInit } from '@angular/core';
 import { CyclePredictionService, type CyclePredictions } from './cycle-prediction.service';
-import { type HistoryInput } from 'cycle-predictor-core';
+import { type HistoryInput } from 'cyclia';
 
 @Component({
   selector: 'app-cycle-predictor',
@@ -473,7 +473,7 @@ export class CyclePredictorComponent implements OnInit {
 ```typescript
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { PredictionEngine, type HistoryInput } from 'cycle-predictor-core';
+import { PredictionEngine, type HistoryInput } from 'cyclia';
 
 interface CyclePredictorProps {
   periodHistory: HistoryInput;
@@ -581,7 +581,7 @@ export default CyclePredictor;
 ### Создание кастомных алгоритмов
 
 ```typescript
-import { BaseRule, type HistoryInput, type PredictionResult, type PredictorConfig, type AnalyticsSummary } from 'cycle-predictor-core';
+import { BaseRule, type HistoryInput, type PredictionResult, type PredictorConfig, type AnalyticsSummary } from 'cyclia';
 
 class MLPredictionRule extends BaseRule {
   readonly id = 'ml-prediction';
@@ -853,7 +853,7 @@ class OptimizedPredictionEngine extends PredictionEngine {
 
 ```typescript
 // worker.ts
-import { PredictionEngine } from 'cycle-predictor-core';
+import { PredictionEngine } from 'cyclia';
 
 self.onmessage = (event) => {
   const { history, config } = event.data;
@@ -969,8 +969,8 @@ class AnalyticsService {
 ### Установка для разработки
 
 ```bash
-git clone https://github.com/your-username/cycle-predictor-core.git
-cd cycle-predictor-core
+git clone https://github.com/your-username/cyclia.git
+cd cyclia
 npm install
 npm run test
 ```
@@ -978,7 +978,7 @@ npm run test
 ### Структура проекта
 
 ```
-cycle-predictor-core/
+cyclia/
 ├── src/
 │   ├── core/           # Основная логика
 │   ├── plugins/        # Алгоритмы прогнозирования
@@ -1044,8 +1044,8 @@ export class YourAlgorithm extends BaseRule {
 
 ## 📞 Поддержка
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/cycle-predictor-core/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/cycle-predictor-core/discussions)
+- **Issues**: [GitHub Issues](https://github.com/your-username/cyclia/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-username/cyclia/discussions)
 - **Email**: support@cycle-predictor.com
 
 ## 📄 Лицензия
