@@ -1,6 +1,8 @@
+
 # cyclia
 
-**Предупреждение:** библиотека не является медицинским изделием и не заменяет консультацию врача. Все прогнозы вероятностные и предназначены только для информационных целей.
+**Warning:** This library is not a medical device and does not replace professional medical advice. All predictions are probabilistic and for informational purposes only.
+
 
 [🌐 Website](https://cycle-landing.vercel.app/) · [📦 npm](https://www.npmjs.com/package/cyclia) · [⭐ GitHub](https://github.com/NextFutureHub/cyclia)
 
@@ -13,19 +15,22 @@
 [![Tests](https://img.shields.io/badge/Tests-Passing-green.svg)](https://github.com/NextFutureHub/cyclia)
 [![Build](https://img.shields.io/badge/Build-Passing-green.svg)](https://github.com/NextFutureHub/cyclia)
 
-Библиотека для прогнозирования менструальных циклов на основе исторических данных. Предоставляет точные алгоритмы для предсказания следующих менструаций, овуляции и фертильных окон.
 
-## 🚀 Возможности
+Library for predicting menstrual cycles based on historical data. Provides accurate algorithms for forecasting upcoming periods, ovulation, and fertile windows.
 
-- **Множественные стратегии прогнозирования**: Calendar и WMA (Weighted Moving Average)
-- **Анализ качества данных**: автоматическая оценка регулярности циклов
-- **Прогнозирование овуляции**: на основе лютеиновой фазы
-- **Определение фертильных окон**: для планирования беременности
-- **Система уверенности**: confidence score для каждого прогноза
-- **Расширяемая архитектура**: возможность добавления кастомных алгоритмов
-- **TypeScript поддержка**: полная типизация из коробки
 
-## 📦 Установка
+## 🚀 Features
+
+- **Multiple prediction strategies**: Calendar and WMA (Weighted Moving Average)
+- **Data quality analysis**: automatic assessment of cycle regularity
+- **Ovulation prediction**: based on luteal phase
+- **Fertile window detection**: for pregnancy planning
+- **Confidence system**: confidence score for each prediction
+- **Extensible architecture**: ability to add custom algorithms
+- **TypeScript support**: full typing out of the box
+
+
+## 📦 Installation
 
 ```bash
 npm install cyclia
@@ -39,13 +44,15 @@ yarn add cyclia
 pnpm add cyclia
 ```
 
+
 ## 📖 Documentation
 
-Подробные примеры использования и API описаны на [официальном сайте](https://cycle-landing.vercel.app/).
+Detailed usage examples and API are described on the [official website](https://cycle-landing.vercel.app/).
 
-## 🎯 Быстрый старт
 
-### Базовое использование
+## 🎯 Quick Start
+
+### Basic Usage
 
 ```typescript
 import { PredictionEngine } from "cyclia";
@@ -62,57 +69,61 @@ const history = {
   ],
 };
 
-// Прогноз следующей менструации
+// Predict next period
 const nextPeriod = engine.predictNextPeriod(history);
-console.log("Следующая менструация:", nextPeriod.likely);
-console.log("Уверенность:", Math.round(nextPeriod.confidence * 100) + "%");
+console.log("Next period:", nextPeriod.likely);
+console.log("Confidence:", Math.round(nextPeriod.confidence * 100) + "%");
 
-// Прогноз овуляции
+// Predict ovulation
 const ovulation = engine.predictOvulation(history);
-console.log("Овуляция:", ovulation.likely);
+console.log("Ovulation:", ovulation.likely);
 
-// Фертильное окно
+// Fertile window
 const fertile = engine.predictFertileWindow(history);
-console.log("Фертильное окно:", fertile.start, "-", fertile.end);
+console.log("Fertile window:", fertile.start, "-", fertile.end);
 ```
 
-### Анализ данных
+
+### Data Analysis
 
 ```typescript
-// Получение аналитической сводки
+// Get analytics summary
 const summary = engine.analyze(history);
-console.log("Средняя длительность цикла:", summary.averageCycle);
-console.log("Регулярность:", summary.irregular ? "Нерегулярный" : "Регулярный");
-console.log("Качество данных:", summary.dataQuality);
+console.log("Average cycle length:", summary.averageCycle);
+console.log("Regularity:", summary.irregular ? "Irregular" : "Regular");
+console.log("Data quality:", summary.dataQuality);
 ```
+
 
 ## 📚 API Reference
 
 ### PredictionEngine
 
-Основной класс для работы с прогнозами.
+Main class for working with predictions.
 
-#### Конструктор
+
+#### Constructor
 
 ```typescript
 new PredictionEngine(config?: PredictorConfig)
 ```
 
-#### Конфигурация (PredictorConfig)
+#### Configuration (PredictorConfig)
 
-| Параметр                    | Тип                   | По умолчанию | Описание                                      |
+| Parameter                   | Type                  | Default      | Description                                   |
 | --------------------------- | --------------------- | ------------ | --------------------------------------------- |
-| `strategy`                  | `'wma' \| 'calendar'` | `'wma'`      | Стратегия прогнозирования                     |
-| `lutealPhaseDays`           | `number`              | `14`         | Длительность лютеиновой фазы                  |
-| `irregularityStdThreshold`  | `number`              | `4`          | Порог нерегулярности (стандартное отклонение) |
-| `minIntervalsForConfidence` | `number`              | `3`          | Минимум интервалов для уверенности            |
-| `timezone`                  | `string`              | Локальная TZ | Таймзона для расчетов                         |
+| `strategy`                  | `'wma' \| 'calendar'` | `'wma'`      | Prediction strategy                           |
+| `lutealPhaseDays`           | `number`              | `14`         | Luteal phase duration                         |
+| `irregularityStdThreshold`  | `number`              | `4`          | Irregularity threshold (standard deviation)    |
+| `minIntervalsForConfidence` | `number`              | `3`          | Minimum intervals for confidence              |
+| `timezone`                  | `string`              | Local TZ     | Timezone for calculations                     |
 
-#### Методы
+
+#### Methods
 
 ##### `analyze(history: HistoryInput): AnalyticsSummary`
 
-Анализирует исторические данные и возвращает сводку.
+Analyzes historical data and returns a summary.
 
 ```typescript
 const summary = engine.analyze(history);
@@ -127,9 +138,10 @@ const summary = engine.analyze(history);
 // }
 ```
 
+
 ##### `predictNextPeriod(history: HistoryInput): PredictionResult`
 
-Прогнозирует дату следующей менструации.
+Predicts the date of the next period.
 
 ```typescript
 const result = engine.predictNextPeriod(history);
@@ -141,13 +153,15 @@ const result = engine.predictNextPeriod(history);
 // }
 ```
 
+
 ##### `predictOvulation(history: HistoryInput): PredictionResult`
 
-Прогнозирует дату овуляции.
+Predicts the date of ovulation.
+
 
 ##### `predictFertileWindow(history: HistoryInput): FertileWindow`
 
-Определяет фертильное окно.
+Determines the fertile window.
 
 ```typescript
 const fertile = engine.predictFertileWindow(history);
@@ -160,7 +174,8 @@ const fertile = engine.predictFertileWindow(history);
 // }
 ```
 
-### Типы данных
+
+### Data Types
 
 #### HistoryInput
 
@@ -174,6 +189,7 @@ interface PeriodStartRecord {
 }
 ```
 
+
 #### PredictionResult
 
 ```typescript
@@ -184,6 +200,7 @@ interface PredictionResult {
   notes: string[]; // Комментарии
 }
 ```
+
 
 #### FertileWindow
 
@@ -197,11 +214,12 @@ interface FertileWindow {
 }
 ```
 
-## 🎨 Интеграция с UI фреймворками
+
+## 🎨 Integration with UI Frameworks
 
 ### React/Next.js
 
-#### Хук для прогнозов
+#### Prediction Hook
 
 ```typescript
 import { useState, useEffect } from "react";
@@ -238,7 +256,8 @@ const useCyclePredictions = (history: HistoryInput) => {
 };
 ```
 
-#### Компонент календаря
+
+#### Calendar Component
 
 ```typescript
 import React from 'react';
@@ -296,6 +315,7 @@ const CycleCalendar: React.FC<CycleCalendarProps> = ({ periodHistory }) => {
   );
 };
 ```
+
 
 ### Vue.js
 
@@ -366,9 +386,10 @@ watch(() => props.periodHistory, calculatePredictions, { immediate: true });
 </script>
 ```
 
+
 ### Angular
 
-#### Сервис
+#### Service
 
 ```typescript
 import { Injectable } from "@angular/core";
@@ -425,7 +446,8 @@ export class CyclePredictionService {
 }
 ```
 
-#### Компонент
+
+#### Component
 
 ```typescript
 import { Component, Input, OnInit } from "@angular/core";
@@ -482,7 +504,8 @@ export class CyclePredictorComponent implements OnInit {
 }
 ```
 
-## 📱 Мобильные приложения
+
+## 📱 Mobile Applications
 
 ### React Native
 
@@ -592,9 +615,10 @@ const styles = StyleSheet.create({
 export default CyclePredictor;
 ```
 
-## 🔧 Расширение функциональности
 
-### Создание кастомных алгоритмов
+## 🔧 Extending Functionality
+
+### Creating Custom Algorithms
 
 ```typescript
 import {
@@ -640,15 +664,16 @@ class MLPredictionRule extends BaseRule {
   }
 }
 
-// Регистрация в движке
+// Register in engine
 const engine = new PredictionEngine();
 engine.register(new MLPredictionRule());
 
-// Использование
+// Usage
 const result = engine.predictNextPeriod(history);
 ```
 
-### Интеграция с внешними данными
+
+### Integration with External Data
 
 ```typescript
 class EnhancedPredictionEngine extends PredictionEngine {
@@ -692,9 +717,10 @@ class EnhancedPredictionEngine extends PredictionEngine {
 }
 ```
 
-## 🗄️ Работа с данными
 
-### Сохранение и загрузка
+## 🗄️ Working with Data
+
+### Saving and Loading
 
 ```typescript
 class CycleDataService {
@@ -735,7 +761,8 @@ class CycleDataService {
 }
 ```
 
-### Экспорт данных
+
+### Data Export
 
 ```typescript
 class DataExportService {
@@ -770,9 +797,10 @@ class DataExportService {
 }
 ```
 
-## 🧪 Тестирование
 
-### Unit тесты
+## 🧪 Testing
+
+### Unit Tests
 
 ```typescript
 import { PredictionEngine } from "cycle-predictor-core";
@@ -816,7 +844,8 @@ describe("PredictionEngine", () => {
 });
 ```
 
-### Integration тесты
+
+### Integration Tests
 
 ```typescript
 describe("Cycle Prediction Integration", () => {
@@ -844,9 +873,10 @@ describe("Cycle Prediction Integration", () => {
 });
 ```
 
-## 🚀 Производительность
 
-### Оптимизация для больших объемов данных
+## 🚀 Performance
+
+### Optimization for Large Data Volumes
 
 ```typescript
 class OptimizedPredictionEngine extends PredictionEngine {
@@ -875,7 +905,8 @@ class OptimizedPredictionEngine extends PredictionEngine {
 }
 ```
 
-### Web Worker для тяжелых вычислений
+
+### Web Worker for Heavy Computations
 
 ```typescript
 // worker.ts
@@ -915,9 +946,10 @@ const calculatePredictions = (history: HistoryInput) => {
 };
 ```
 
-## 🔒 Безопасность и приватность
 
-### Локальная обработка данных
+## 🔒 Security and Privacy
+
+### Local Data Processing
 
 ```typescript
 class PrivacyAwarePredictionEngine extends PredictionEngine {
@@ -931,7 +963,8 @@ class PrivacyAwarePredictionEngine extends PredictionEngine {
 }
 ```
 
-### Шифрование данных
+
+### Data Encryption
 
 ```typescript
 import CryptoJS from "crypto-js";
@@ -965,9 +998,10 @@ class EncryptedDataService {
 }
 ```
 
-## 📊 Мониторинг и аналитика
 
-### Логирование использования
+## 📊 Monitoring and Analytics
+
+### Usage Logging
 
 ```typescript
 class AnalyticsService {
@@ -993,38 +1027,42 @@ class AnalyticsService {
 }
 ```
 
-## 🤝 Вклад в развитие
 
-### Установка для разработки
+## 🤝 Contributing
+
+### Development Setup
 
 ```bash
-git clone https://github.com/your-username/cyclia.git
+git clone https://github.com/NextFutureHub/cyclia.git
 cd cyclia
 npm install
 npm run test
 ```
 
-### Структура проекта
+
+### Project Structure
+
 
 ```
 cyclia/
 ├── src/
-│   ├── core/           # Основная логика
-│   ├── plugins/        # Алгоритмы прогнозирования
-│   ├── utils/          # Утилиты
-│   ├── types.ts        # TypeScript типы
-│   └── index.ts        # Точка входа
-├── tests/              # Тесты
-├── docs/               # Документация
-└── examples/           # Примеры использования
+│   ├── core/           # Core logic
+│   ├── plugins/        # Prediction algorithms
+│   ├── utils/          # Utilities
+│   ├── types.ts        # TypeScript types
+│   └── index.ts        # Entry point
+├── tests/              # Tests
+├── docs/               # Documentation
+└── examples/           # Usage examples
 ```
 
-### Добавление новых алгоритмов
 
-1. Создайте новый класс, наследующий от `BaseRule`
-2. Реализуйте методы `predictNextPeriod` и `predictFertility`
-3. Добавьте тесты
-4. Обновите документацию
+### Adding New Algorithms
+
+1. Create a new class that extends `BaseRule`
+2. Implement the `predictNextPeriod` and `predictFertility` methods
+3. Add tests
+4. Update documentation
 
 ```typescript
 // src/plugins/yourAlgorithm.ts
@@ -1034,7 +1072,7 @@ export class YourAlgorithm extends BaseRule {
   readonly id = "your-algorithm";
 
   predictNextPeriod(history, cfg, summary) {
-    // Ваша логика
+    // Your logic here
     return {
       likely: "2025-06-15",
       window: { start: "2025-06-13", end: "2025-06-17" },
@@ -1045,39 +1083,44 @@ export class YourAlgorithm extends BaseRule {
 }
 ```
 
-### Отправка Pull Request
 
-1. Форкните репозиторий
-2. Создайте ветку для вашей функции
-3. Добавьте тесты
-4. Обновите документацию
-5. Отправьте Pull Request
+### Submitting a Pull Request
+
+1. Fork the repository
+2. Create a branch for your feature
+3. Add tests
+4. Update documentation
+5. Submit a Pull Request
+
 
 ## 📈 Roadmap
 
-### Планируемые функции
+### Planned Features
 
-- [ ] Машинное обучение для улучшения точности
-- [ ] Интеграция с носимыми устройствами
-- [ ] Поддержка множественных пользователей
-- [ ] API для серверной обработки
-- [ ] Плагины для популярных фреймворков
-- [ ] Интеграция с медицинскими системами
+- [ ] Machine learning for improved accuracy
+- [ ] Integration with wearable devices
+- [ ] Multi-user support
+- [ ] API for server-side processing
+- [ ] Plugins for popular frameworks
+- [ ] Integration with medical systems
 
-### Версии
 
-- **v1.0.0** - Базовая функциональность
+### Versions
 
-## 📞 Поддержка
+- **v1.0.0** - Basic functionality
+
+
+## 📞 Support
 
 - **Email**: support@cycle-predictor.com
 
-## 📄 Лицензия
 
-MIT License - см. файл [LICENSE](LICENSE) для деталей.
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
 
 ⭐ If you like this library, consider giving it a star on GitHub!
 
 ---
 
-**Важно**: Эта библиотека предназначена только для информационных целей и не заменяет медицинскую консультацию. Всегда консультируйтесь с врачом по вопросам здоровья.
+**Important**: This library is for informational purposes only and does not replace medical advice. Always consult your doctor for health matters.
