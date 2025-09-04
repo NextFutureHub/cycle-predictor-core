@@ -2,6 +2,8 @@
 
 **Предупреждение:** библиотека не является медицинским изделием и не заменяет консультацию врача. Все прогнозы вероятностные и предназначены только для информационных целей.
 
+[🌐 Website](https://cycle-landing.vercel.app/) · [📦 npm](https://www.npmjs.com/package/cyclia) · [⭐ GitHub](https://github.com/NextFutureHub/cyclia)
+
 [![npm version](https://badge.fury.io/js/cyclia.svg)](https://badge.fury.io/js/cyclia)
 [![npm downloads](https://img.shields.io/npm/dm/cyclia.svg)](https://www.npmjs.com/package/cyclia)
 [![npm status](https://img.shields.io/badge/npm-published-green.svg)](https://www.npmjs.com/package/cyclia)
@@ -94,13 +96,13 @@ new PredictionEngine(config?: PredictorConfig)
 
 #### Конфигурация (PredictorConfig)
 
-| Параметр | Тип | По умолчанию | Описание |
-|----------|-----|--------------|----------|
-| `strategy` | `'wma' \| 'calendar'` | `'wma'` | Стратегия прогнозирования |
-| `lutealPhaseDays` | `number` | `14` | Длительность лютеиновой фазы |
-| `irregularityStdThreshold` | `number` | `4` | Порог нерегулярности (стандартное отклонение) |
-| `minIntervalsForConfidence` | `number` | `3` | Минимум интервалов для уверенности |
-| `timezone` | `string` | Локальная TZ | Таймзона для расчетов |
+| Параметр                    | Тип                   | По умолчанию | Описание                                      |
+| --------------------------- | --------------------- | ------------ | --------------------------------------------- |
+| `strategy`                  | `'wma' \| 'calendar'` | `'wma'`      | Стратегия прогнозирования                     |
+| `lutealPhaseDays`           | `number`              | `14`         | Длительность лютеиновой фазы                  |
+| `irregularityStdThreshold`  | `number`              | `4`          | Порог нерегулярности (стандартное отклонение) |
+| `minIntervalsForConfidence` | `number`              | `3`          | Минимум интервалов для уверенности            |
+| `timezone`                  | `string`              | Локальная TZ | Таймзона для расчетов                         |
 
 #### Методы
 
@@ -172,10 +174,10 @@ interface PeriodStartRecord {
 
 ```typescript
 interface PredictionResult {
-  likely: ISODate | null;        // Вероятная дата
-  window: DateRange | null;      // Окно прогноза
-  confidence: number;            // Уверенность (0-1)
-  notes: string[];               // Комментарии
+  likely: ISODate | null; // Вероятная дата
+  window: DateRange | null; // Окно прогноза
+  confidence: number; // Уверенность (0-1)
+  notes: string[]; // Комментарии
 }
 ```
 
@@ -183,11 +185,11 @@ interface PredictionResult {
 
 ```typescript
 interface FertileWindow {
-  start: ISODate;                // Начало фертильного окна
-  peak: ISODate;                 // Пик фертильности (овуляция)
-  end: ISODate;                  // Конец фертильного окна
-  confidence: number;            // Уверенность
-  notes: string[];               // Комментарии
+  start: ISODate; // Начало фертильного окна
+  peak: ISODate; // Пик фертильности (овуляция)
+  end: ISODate; // Конец фертильного окна
+  confidence: number; // Уверенность
+  notes: string[]; // Комментарии
 }
 ```
 
@@ -198,8 +200,8 @@ interface FertileWindow {
 #### Хук для прогнозов
 
 ```typescript
-import { useState, useEffect } from 'react';
-import { PredictionEngine, HistoryInput } from 'cyclia';
+import { useState, useEffect } from "react";
+import { PredictionEngine, HistoryInput } from "cyclia";
 
 const useCyclePredictions = (history: HistoryInput) => {
   const [predictions, setPredictions] = useState(null);
@@ -210,15 +212,15 @@ const useCyclePredictions = (history: HistoryInput) => {
     if (history.periodStarts.length >= 2) {
       setLoading(true);
       setError(null);
-      
+
       try {
-        const engine = new PredictionEngine({ strategy: 'wma' });
-        
+        const engine = new PredictionEngine({ strategy: "wma" });
+
         const nextPeriod = engine.predictNextPeriod(history);
         const ovulation = engine.predictOvulation(history);
         const fertile = engine.predictFertileWindow(history);
         const summary = engine.analyze(history);
-        
+
         setPredictions({ nextPeriod, ovulation, fertile, summary });
       } catch (err) {
         setError(err.message);
@@ -306,12 +308,12 @@ const CycleCalendar: React.FC<CycleCalendarProps> = ({ periodHistory }) => {
         <p>{{ predictions.nextPeriod.likely }}</p>
         <p>Уверенность: {{ Math.round(predictions.nextPeriod.confidence * 100) }}%</p>
       </div>
-      
+
       <div class="prediction-card">
         <h3>Овуляция</h3>
         <p>{{ predictions.ovulation.likely }}</p>
       </div>
-      
+
       <div class="prediction-card">
         <h3>Фертильное окно</h3>
         <p>{{ predictions.fertile.start }} - {{ predictions.fertile.end }}</p>
@@ -365,9 +367,13 @@ watch(() => props.periodHistory, calculatePredictions, { immediate: true });
 #### Сервис
 
 ```typescript
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { PredictionEngine, type HistoryInput, type PredictionResult } from 'cyclia';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import {
+  PredictionEngine,
+  type HistoryInput,
+  type PredictionResult,
+} from "cyclia";
 
 export interface CyclePredictions {
   nextPeriod: PredictionResult;
@@ -377,11 +383,13 @@ export interface CyclePredictions {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CyclePredictionService {
-  private engine = new PredictionEngine({ strategy: 'wma' });
-  private predictionsSubject = new BehaviorSubject<CyclePredictions | null>(null);
+  private engine = new PredictionEngine({ strategy: "wma" });
+  private predictionsSubject = new BehaviorSubject<CyclePredictions | null>(
+    null
+  );
   private loadingSubject = new BehaviorSubject<boolean>(false);
 
   predictions$ = this.predictionsSubject.asObservable();
@@ -400,12 +408,12 @@ export class CyclePredictionService {
         nextPeriod: this.engine.predictNextPeriod(history),
         ovulation: this.engine.predictOvulation(history),
         fertile: this.engine.predictFertileWindow(history),
-        summary: this.engine.analyze(history)
+        summary: this.engine.analyze(history),
       };
 
       this.predictionsSubject.next(predictions);
     } catch (error) {
-      console.error('Ошибка расчета прогнозов:', error);
+      console.error("Ошибка расчета прогнозов:", error);
     } finally {
       this.loadingSubject.next(false);
     }
@@ -416,41 +424,45 @@ export class CyclePredictionService {
 #### Компонент
 
 ```typescript
-import { Component, Input, OnInit } from '@angular/core';
-import { CyclePredictionService, type CyclePredictions } from './cycle-prediction.service';
-import { type HistoryInput } from 'cyclia';
+import { Component, Input, OnInit } from "@angular/core";
+import {
+  CyclePredictionService,
+  type CyclePredictions,
+} from "./cycle-prediction.service";
+import { type HistoryInput } from "cyclia";
 
 @Component({
-  selector: 'app-cycle-predictor',
+  selector: "app-cycle-predictor",
   template: `
     <div class="cycle-predictor">
-      <div *ngIf="loading$ | async" class="loading">
-        Анализируем данные...
-      </div>
-      
+      <div *ngIf="loading$ | async" class="loading">Анализируем данные...</div>
+
       <div *ngIf="predictions$ | async as predictions" class="predictions">
         <div class="prediction-card">
           <h3>Следующая менструация</h3>
           <p class="date">{{ predictions.nextPeriod.likely }}</p>
           <p class="confidence">
-            Уверенность: {{ (predictions.nextPeriod.confidence * 100) | number:'1.0-0' }}%
+            Уверенность:
+            {{ predictions.nextPeriod.confidence * 100 | number: "1.0-0" }}%
           </p>
         </div>
-        
+
         <div class="prediction-card">
           <h3>Овуляция</h3>
           <p class="date">{{ predictions.ovulation.likely }}</p>
         </div>
-        
+
         <div class="prediction-card">
           <h3>Фертильное окно</h3>
-          <p class="range">{{ predictions.fertile.start }} - {{ predictions.fertile.end }}</p>
+          <p class="range">
+            {{ predictions.fertile.start }} - {{ predictions.fertile.end }}
+          </p>
           <p class="peak">Пик: {{ predictions.fertile.peak }}</p>
         </div>
       </div>
     </div>
   `,
-  styleUrls: ['./cycle-predictor.component.scss']
+  styleUrls: ["./cycle-predictor.component.scss"],
 })
 export class CyclePredictorComponent implements OnInit {
   @Input() periodHistory!: HistoryInput;
@@ -486,12 +498,12 @@ const CyclePredictor: React.FC<CyclePredictorProps> = ({ periodHistory }) => {
   React.useEffect(() => {
     if (periodHistory.periodStarts.length >= 2) {
       setLoading(true);
-      
+
       const engine = new PredictionEngine({ strategy: 'wma' });
       const nextPeriod = engine.predictNextPeriod(periodHistory);
       const ovulation = engine.predictOvulation(periodHistory);
       const fertile = engine.predictFertileWindow(periodHistory);
-      
+
       setPredictions({ nextPeriod, ovulation, fertile });
       setLoading(false);
     }
@@ -522,12 +534,12 @@ const CyclePredictor: React.FC<CyclePredictorProps> = ({ periodHistory }) => {
           Уверенность: {Math.round(predictions.nextPeriod.confidence * 100)}%
         </Text>
       </View>
-      
+
       <View style={styles.card}>
         <Text style={styles.title}>Овуляция</Text>
         <Text style={styles.date}>{predictions.ovulation.likely}</Text>
       </View>
-      
+
       <View style={styles.card}>
         <Text style={styles.title}>Фертильное окно</Text>
         <Text style={styles.range}>
@@ -581,10 +593,16 @@ export default CyclePredictor;
 ### Создание кастомных алгоритмов
 
 ```typescript
-import { BaseRule, type HistoryInput, type PredictionResult, type PredictorConfig, type AnalyticsSummary } from 'cyclia';
+import {
+  BaseRule,
+  type HistoryInput,
+  type PredictionResult,
+  type PredictorConfig,
+  type AnalyticsSummary,
+} from "cyclia";
 
 class MLPredictionRule extends BaseRule {
-  readonly id = 'ml-prediction';
+  readonly id = "ml-prediction";
 
   predictNextPeriod(
     history: HistoryInput,
@@ -593,15 +611,15 @@ class MLPredictionRule extends BaseRule {
   ): PredictionResult {
     // Ваша ML логика здесь
     const mlPrediction = this.runMLModel(history, summary);
-    
+
     return {
       likely: mlPrediction.date,
       window: {
         start: mlPrediction.startDate,
-        end: mlPrediction.endDate
+        end: mlPrediction.endDate,
       },
       confidence: mlPrediction.confidence,
-      notes: ['ML-based prediction', `model: ${mlPrediction.modelName}`]
+      notes: ["ML-based prediction", `model: ${mlPrediction.modelName}`],
     };
   }
 
@@ -609,11 +627,11 @@ class MLPredictionRule extends BaseRule {
     // Интеграция с вашей ML моделью
     // Например, TensorFlow.js, ONNX.js, или внешний API
     return {
-      date: '2025-06-15',
-      startDate: '2025-06-13',
-      endDate: '2025-06-17',
+      date: "2025-06-15",
+      startDate: "2025-06-13",
+      endDate: "2025-06-17",
       confidence: 0.85,
-      modelName: 'cycle-predictor-v1'
+      modelName: "cycle-predictor-v1",
     };
   }
 }
@@ -632,17 +650,17 @@ const result = engine.predictNextPeriod(history);
 class EnhancedPredictionEngine extends PredictionEngine {
   async predictWithExternalFactors(history: HistoryInput) {
     const basePrediction = this.predictNextPeriod(history);
-    
+
     // Получаем дополнительные факторы
     const weatherData = await this.getWeatherData();
     const stressLevel = await this.getStressLevel();
     const sleepQuality = await this.getSleepQuality();
-    
+
     // Корректируем прогноз
     return this.adjustPrediction(basePrediction, {
       weather: weatherData,
       stress: stressLevel,
-      sleep: sleepQuality
+      sleep: sleepQuality,
     });
   }
 
@@ -653,18 +671,18 @@ class EnhancedPredictionEngine extends PredictionEngine {
     // Корректировка на основе факторов
     if (factors.stress > 7) {
       adjustedConfidence *= 0.9;
-      notes.push('high stress detected');
+      notes.push("high stress detected");
     }
 
     if (factors.sleep < 6) {
       adjustedConfidence *= 0.95;
-      notes.push('poor sleep quality');
+      notes.push("poor sleep quality");
     }
 
     return {
       ...basePrediction,
       confidence: Math.max(0.1, adjustedConfidence),
-      notes
+      notes,
     };
   }
 }
@@ -676,14 +694,14 @@ class EnhancedPredictionEngine extends PredictionEngine {
 
 ```typescript
 class CycleDataService {
-  private readonly STORAGE_KEY = 'cycle_history';
-  private readonly PREDICTIONS_KEY = 'cycle_predictions';
+  private readonly STORAGE_KEY = "cycle_history";
+  private readonly PREDICTIONS_KEY = "cycle_predictions";
 
   async savePeriodDate(date: string): Promise<void> {
     const history = await this.loadHistory();
     history.periodStarts.push({ date });
     await this.saveHistory(history);
-    
+
     // Пересчитываем прогнозы
     const engine = new PredictionEngine();
     const predictions = engine.predictNextPeriod(history);
@@ -702,12 +720,12 @@ class CycleDataService {
   async getCurrentPredictions(): Promise<any> {
     const history = await this.loadHistory();
     const engine = new PredictionEngine();
-    
+
     return {
       nextPeriod: engine.predictNextPeriod(history),
       ovulation: engine.predictOvulation(history),
       fertile: engine.predictFertileWindow(history),
-      summary: engine.analyze(history)
+      summary: engine.analyze(history),
     };
   }
 }
@@ -718,28 +736,32 @@ class CycleDataService {
 ```typescript
 class DataExportService {
   exportToCSV(history: HistoryInput): string {
-    const headers = ['Date', 'Cycle Length'];
+    const headers = ["Date", "Cycle Length"];
     const rows = [];
-    
+
     for (let i = 1; i < history.periodStarts.length; i++) {
       const prev = new Date(history.periodStarts[i - 1].date);
       const curr = new Date(history.periodStarts[i].date);
-      const cycleLength = Math.round((curr.getTime() - prev.getTime()) / (1000 * 60 * 60 * 24));
-      
+      const cycleLength = Math.round(
+        (curr.getTime() - prev.getTime()) / (1000 * 60 * 60 * 24)
+      );
+
       rows.push([history.periodStarts[i].date, cycleLength]);
     }
-    
-    return [headers, ...rows]
-      .map(row => row.join(','))
-      .join('\n');
+
+    return [headers, ...rows].map((row) => row.join(",")).join("\n");
   }
 
   exportToJSON(history: HistoryInput, predictions: any): string {
-    return JSON.stringify({
-      history,
-      predictions,
-      exportDate: new Date().toISOString()
-    }, null, 2);
+    return JSON.stringify(
+      {
+        history,
+        predictions,
+        exportDate: new Date().toISOString(),
+      },
+      null,
+      2
+    );
   }
 }
 ```
@@ -749,39 +771,39 @@ class DataExportService {
 ### Unit тесты
 
 ```typescript
-import { PredictionEngine } from 'cycle-predictor-core';
+import { PredictionEngine } from "cycle-predictor-core";
 
-describe('PredictionEngine', () => {
+describe("PredictionEngine", () => {
   let engine: PredictionEngine;
 
   beforeEach(() => {
-    engine = new PredictionEngine({ strategy: 'wma' });
+    engine = new PredictionEngine({ strategy: "wma" });
   });
 
-  it('should predict next period correctly', () => {
+  it("should predict next period correctly", () => {
     const history = {
       periodStarts: [
-        { date: '2025-01-01' },
-        { date: '2025-01-30' }, // 29 дней
-        { date: '2025-02-28' }, // 29 дней
-      ]
+        { date: "2025-01-01" },
+        { date: "2025-01-30" }, // 29 дней
+        { date: "2025-02-28" }, // 29 дней
+      ],
     };
 
     const result = engine.predictNextPeriod(history);
-    
+
     expect(result.likely).toBeTruthy();
     expect(result.confidence).toBeGreaterThan(0);
     expect(result.confidence).toBeLessThanOrEqual(1);
   });
 
-  it('should handle irregular cycles', () => {
+  it("should handle irregular cycles", () => {
     const history = {
       periodStarts: [
-        { date: '2025-01-01' },
-        { date: '2025-01-25' }, // 24 дня
-        { date: '2025-02-28' }, // 33 дня
-        { date: '2025-03-25' }, // 25 дней
-      ]
+        { date: "2025-01-01" },
+        { date: "2025-01-25" }, // 24 дня
+        { date: "2025-02-28" }, // 33 дня
+        { date: "2025-03-25" }, // 25 дней
+      ],
     };
 
     const summary = engine.analyze(history);
@@ -793,16 +815,16 @@ describe('PredictionEngine', () => {
 ### Integration тесты
 
 ```typescript
-describe('Cycle Prediction Integration', () => {
-  it('should provide consistent predictions across methods', () => {
+describe("Cycle Prediction Integration", () => {
+  it("should provide consistent predictions across methods", () => {
     const engine = new PredictionEngine();
     const history = {
       periodStarts: [
-        { date: '2025-01-01' },
-        { date: '2025-01-30' },
-        { date: '2025-02-28' },
-        { date: '2025-03-29' },
-      ]
+        { date: "2025-01-01" },
+        { date: "2025-01-30" },
+        { date: "2025-02-28" },
+        { date: "2025-03-29" },
+      ],
     };
 
     const nextPeriod = engine.predictNextPeriod(history);
@@ -828,19 +850,19 @@ class OptimizedPredictionEngine extends PredictionEngine {
 
   predictNextPeriod(history: HistoryInput): PredictionResult {
     const cacheKey = this.generateCacheKey(history);
-    
+
     if (this.cache.has(cacheKey)) {
       return this.cache.get(cacheKey);
     }
 
     const result = super.predictNextPeriod(history);
     this.cache.set(cacheKey, result);
-    
+
     return result;
   }
 
   private generateCacheKey(history: HistoryInput): string {
-    return JSON.stringify(history.periodStarts.map(p => p.date));
+    return JSON.stringify(history.periodStarts.map((p) => p.date));
   }
 
   clearCache(): void {
@@ -853,20 +875,20 @@ class OptimizedPredictionEngine extends PredictionEngine {
 
 ```typescript
 // worker.ts
-import { PredictionEngine } from 'cyclia';
+import { PredictionEngine } from "cyclia";
 
 self.onmessage = (event) => {
   const { history, config } = event.data;
-  
+
   try {
     const engine = new PredictionEngine(config);
     const predictions = {
       nextPeriod: engine.predictNextPeriod(history),
       ovulation: engine.predictOvulation(history),
       fertile: engine.predictFertileWindow(history),
-      summary: engine.analyze(history)
+      summary: engine.analyze(history),
     };
-    
+
     self.postMessage({ success: true, predictions });
   } catch (error) {
     self.postMessage({ success: false, error: error.message });
@@ -874,7 +896,7 @@ self.onmessage = (event) => {
 };
 
 // main.ts
-const worker = new Worker('./worker.js');
+const worker = new Worker("./worker.js");
 
 worker.onmessage = (event) => {
   if (event.data.success) {
@@ -885,7 +907,7 @@ worker.onmessage = (event) => {
 };
 
 const calculatePredictions = (history: HistoryInput) => {
-  worker.postMessage({ history, config: { strategy: 'wma' } });
+  worker.postMessage({ history, config: { strategy: "wma" } });
 };
 ```
 
@@ -897,7 +919,7 @@ const calculatePredictions = (history: HistoryInput) => {
 class PrivacyAwarePredictionEngine extends PredictionEngine {
   // Все вычисления происходят локально
   // Данные не отправляются на сервер
-  
+
   predictNextPeriod(history: HistoryInput): PredictionResult {
     // Локальная обработка
     return super.predictNextPeriod(history);
@@ -908,13 +930,16 @@ class PrivacyAwarePredictionEngine extends PredictionEngine {
 ### Шифрование данных
 
 ```typescript
-import CryptoJS from 'crypto-js';
+import CryptoJS from "crypto-js";
 
 class EncryptedDataService {
-  private readonly SECRET_KEY = 'your-secret-key';
+  private readonly SECRET_KEY = "your-secret-key";
 
   encryptData(data: any): string {
-    return CryptoJS.AES.encrypt(JSON.stringify(data), this.SECRET_KEY).toString();
+    return CryptoJS.AES.encrypt(
+      JSON.stringify(data),
+      this.SECRET_KEY
+    ).toString();
   }
 
   decryptData(encryptedData: string): any {
@@ -924,13 +949,13 @@ class EncryptedDataService {
 
   async saveEncryptedHistory(history: HistoryInput): Promise<void> {
     const encrypted = this.encryptData(history);
-    localStorage.setItem('encrypted_cycle_data', encrypted);
+    localStorage.setItem("encrypted_cycle_data", encrypted);
   }
 
   async loadEncryptedHistory(): Promise<HistoryInput> {
-    const encrypted = localStorage.getItem('encrypted_cycle_data');
+    const encrypted = localStorage.getItem("encrypted_cycle_data");
     if (!encrypted) return { periodStarts: [] };
-    
+
     return this.decryptData(encrypted);
   }
 }
@@ -946,9 +971,9 @@ class AnalyticsService {
     const event = {
       timestamp: new Date().toISOString(),
       dataPoints: history.periodStarts.length,
-      predictionType: 'cycle',
+      predictionType: "cycle",
       confidence: predictions.nextPeriod.confidence,
-      irregular: predictions.summary.irregular
+      irregular: predictions.summary.irregular,
     };
 
     // Отправка в аналитическую систему
@@ -957,8 +982,8 @@ class AnalyticsService {
 
   private sendAnalytics(event: any): void {
     // Интеграция с Google Analytics, Mixpanel, etc.
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'cycle_prediction', event);
+    if (typeof gtag !== "undefined") {
+      gtag("event", "cycle_prediction", event);
     }
   }
 }
@@ -999,18 +1024,18 @@ cyclia/
 
 ```typescript
 // src/plugins/yourAlgorithm.ts
-import { BaseRule } from './baseRule';
+import { BaseRule } from "./baseRule";
 
 export class YourAlgorithm extends BaseRule {
-  readonly id = 'your-algorithm';
+  readonly id = "your-algorithm";
 
   predictNextPeriod(history, cfg, summary) {
     // Ваша логика
     return {
-      likely: '2025-06-15',
-      window: { start: '2025-06-13', end: '2025-06-17' },
+      likely: "2025-06-15",
+      window: { start: "2025-06-13", end: "2025-06-17" },
       confidence: 0.8,
-      notes: ['your algorithm']
+      notes: ["your algorithm"],
     };
   }
 }
@@ -1041,8 +1066,6 @@ export class YourAlgorithm extends BaseRule {
 
 ## 📞 Поддержка
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/cycle-predictor-core/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/cycle-predictor-core/discussions)
 - **Email**: support@cycle-predictor.com
 
 ## 📄 Лицензия
