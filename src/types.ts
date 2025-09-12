@@ -96,3 +96,14 @@ export interface PredictionEngineRule {
     summary: AnalyticsSummary
   ): { ovulation: PredictionResult; fertile: FertileWindow };
 }
+
+/**
+ * Прогноз беременности.
+ */
+export interface PregnancyPrediction {
+  dueDate: Date;
+  currentWeek: number;
+  currentTrimester: number;
+  daysRemaining: number;
+  milestones: string[];
+}
