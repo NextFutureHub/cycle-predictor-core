@@ -1,6 +1,6 @@
 {
   "name": "cyclia",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Library for predicting menstrual cycles based on historical data",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

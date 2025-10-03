@@ -25,6 +25,7 @@ Library for predicting menstrual cycles based on historical data. Provides accur
 - **Data quality analysis**: automatic assessment of cycle regularity
 - **Ovulation prediction**: based on luteal phase
 - **Fertile window detection**: for pregnancy planning
+- **Pregnancy tracking**: current week, trimester, and milestones
 - **Confidence system**: confidence score for each prediction
 - **Extensible architecture**: ability to add custom algorithms
 - **TypeScript support**: full typing out of the box
@@ -81,6 +82,11 @@ console.log("Ovulation:", ovulation.likely);
 // Fertile window
 const fertile = engine.predictFertileWindow(history);
 console.log("Fertile window:", fertile.start, "-", fertile.end);
+
+// Pregnancy prediction
+const pregnancy = engine.predictPregnancy(new Date("2025-01-15"));
+console.log("Pregnancy week:", pregnancy.currentWeek);
+console.log("Due date:", pregnancy.dueDate);
 ```
 
 
@@ -175,6 +181,32 @@ const fertile = engine.predictFertileWindow(history);
 ```
 
 
+##### `predictPregnancy(lastPeriodDate: Date): PregnancyPrediction`
+
+Predicts pregnancy progress based on last period date.
+
+```typescript
+const pregnancy = engine.predictPregnancy(new Date("2025-01-15"));
+// {
+//   dueDate: Date,
+//   currentWeek: 12,
+//   currentTrimester: 1,
+//   daysRemaining: 196,
+//   milestones: ["Завершение первого триместра", "Снижение риска выкидыша"]
+// }
+```
+
+
+##### `predictPregnancyFromHistory(history: HistoryInput): PregnancyPrediction`
+
+Predicts pregnancy progress using the last period date from cycle history.
+
+```typescript
+const pregnancy = engine.predictPregnancyFromHistory(history);
+// Uses the most recent period date from history
+```
+
+
 ### Data Types
 
 #### HistoryInput
@@ -211,6 +243,19 @@ interface FertileWindow {
   end: ISODate; // Конец фертильного окна
   confidence: number; // Уверенность
   notes: string[]; // Комментарии
+}
+```
+
+
+#### PregnancyPrediction
+
+```typescript
+interface PregnancyPrediction {
+  dueDate: Date; // Предполагаемая дата родов
+  currentWeek: number; // Текущая неделя беременности
+  currentTrimester: number; // Текущий триместр (1-3)
+  daysRemaining: number; // Дней до родов
+  milestones: string[]; // Вехи развития для текущей недели
 }
 ```
 

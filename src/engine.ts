@@ -5,10 +5,12 @@ import {
   PredictionEngineRule,
   PredictionResult,
   PredictorConfig,
+  PregnancyPrediction,
 } from "./types";
 import { analyzeHistory } from "./core/analytics";
 import { CalendarRule } from "./plugins/calendarRule";
 import { WmaRule } from "./plugins/wmaRule";
+import { predictPregnancy } from "./pregnancy/pregnancy";
 
 export class PredictionEngine {
   private rules: Record<string, PredictionEngineRule> = {};
@@ -88,5 +90,30 @@ export class PredictionEngine {
       ...fertile,
       confidence: Math.min(1, fertile.confidence * multiplier),
     };
+  }
+
+  /**
+   * Прогнозирование беременности на основе даты последней менструации
+   * @param lastPeriodDate - дата начала последней менструации
+   * @returns прогноз беременности с текущей неделей, триместром и вехами
+   */
+  predictPregnancy(lastPeriodDate: Date): PregnancyPrediction {
+    return predictPregnancy(lastPeriodDate);
+  }
+
+  /**
+   * Прогнозирование беременности на основе истории циклов
+   * Использует последнюю дату менструации из истории
+   * @param history - история менструальных циклов
+   * @returns прогноз беременности
+   */
+  predictPregnancyFromHistory(history: HistoryInput): PregnancyPrediction {
+    if (!history.periodStarts || history.periodStarts.length === 0) {
+      throw new Error("История менструаций пуста");
+    }
+
+    // Берем последнюю дату менструации
+    const lastPeriodDate = new Date(history.periodStarts[history.periodStarts.length - 1].date + "T00:00:00");
+    return predictPregnancy(lastPeriodDate);
   }
 }
